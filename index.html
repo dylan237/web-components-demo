@@ -1,0 +1,38 @@
+<!-- https://www.infoq.cn/article/llxdiogqzvvci57_zgjm -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Components Playground</title>
+</head>
+<body>
+  <button onClick="update()">update</button>
+  <button onClick="append()">append</button>
+  <br>
+  <br>
+  <my-counter id="counter" count=10>
+    <p>slot</p>
+    <p slot="define">named slot</p>
+  </my-counter>
+
+  <script src="./counter.js"></script>
+  <script>
+    function update() {
+      const counter = document.querySelector("#counter");
+      counter.setAttribute("count", 100);
+    }
+
+    function append() {
+      const el = customElements.get("my-counter");
+      const myCounter = new el(); // same as document.createElement('my-element');
+      myCounter.setAttribute("count", 10000);
+      // console.log(
+      //   "myCounter---",
+      //   myCounter.shadow.querySelector('slot[name="define"]').assignedElements()
+      // );
+      document.body.appendChild(myCounter);
+    }
+  </script>
+</body>
+</html>
